@@ -33,7 +33,7 @@ else:
         df_scaled[metric] = 1 - df_scaled[metric]
 
     # Criar um score combinando todas as métricas com pesos opcionais
-    weights = {"SS": 1.5, "DBS": 1.5, "CHS": 1.5, "SSE": 1.5, "CVS": 1.5}  # Ajuste os pesos se necessário
+    weights = {"SS": 1, "DBS": 1, "CHS": 1, "SSE": 1, "CVS": 1}  # Ajuste os pesos se necessário
     df_scaled["Score"] = sum(df_scaled[metric] * weight for metric, weight in weights.items())
 
     # Encontrar a melhor linha

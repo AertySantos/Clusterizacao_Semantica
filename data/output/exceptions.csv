@@ -1,22 +1,23 @@
-dataset.txt	2025-01-30 19:45:10.806963	0.00017975966135660808	euclidean	dbscan	silhouette	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 19:45:13.218988	0.0002007762591044108	euclidean	dbscan	ch_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 19:45:15.675321	0.0001806775728861491	euclidean	dbscan	db_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 19:45:19.070746	0.024472363789876304	euclidean	dbscan	sse	default	Number of labels is 1. Valid values are 2 to n_samples - 1 (inclusive)
-dataset.txt	2025-01-30 19:47:24.116631	0.0010425527890523276	manhattan	dbscan	silhouette	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 19:47:26.013261	0.0007288257280985514	manhattan	dbscan	ch_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 19:47:27.821392	0.0006333351135253906	manhattan	dbscan	db_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 19:47:31.082146	0.02441032330195109	manhattan	dbscan	sse	default	Number of labels is 1. Valid values are 2 to n_samples - 1 (inclusive)
-dataset.txt	2025-01-30 19:49:33.225469	0.0007424195607503255	cosine	dbscan	silhouette	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 19:49:37.778592	0.0018923481305440266	cosine	dbscan	db_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 19:56:56.355664	0.0009766578674316405	cityblock	dbscan	silhouette	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 19:56:58.825894	0.0009113272031148274	cityblock	dbscan	ch_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 19:57:01.265968	0.000957334041595459	cityblock	dbscan	db_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 19:57:04.970620	0.024334510167439777	cityblock	dbscan	sse	default	Number of labels is 1. Valid values are 2 to n_samples - 1 (inclusive)
-dataset.txt	2025-01-30 19:59:06.562823	0.0006318211555480957	l1	dbscan	silhouette	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 19:59:08.390517	0.000830690066019694	l1	dbscan	ch_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 19:59:10.875388	0.0010294477144877116	l1	dbscan	db_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 19:59:14.041920	0.022338223457336426	l1	dbscan	sse	default	Number of labels is 1. Valid values are 2 to n_samples - 1 (inclusive)
-dataset.txt	2025-01-30 20:01:16.108834	0.00019899606704711914	l2	dbscan	silhouette	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 20:01:17.968973	0.00024162928263346355	l2	dbscan	ch_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 20:01:19.777408	0.00018357038497924806	l2	dbscan	db_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
-dataset.txt	2025-01-30 20:01:23.975054	0.03146611054738362	l2	dbscan	sse	default	Number of labels is 1. Valid values are 2 to n_samples - 1 (inclusive)
+dataset.txt	2025-01-31 18:19:57.410761	0.007274218400319417	euclidean	dbscan	silhouette	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:19:59.069505	0.00754788319269816	euclidean	dbscan	ch_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:20:00.810004	0.00745386282602946	euclidean	dbscan	db_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:20:08.318816	0.10451372861862182	euclidean	dbscan	sse	default	Number of labels is 1. Valid values are 2 to n_samples - 1 (inclusive)
+dataset.txt	2025-01-31 18:21:49.439886	0.008200248082478842	manhattan	dbscan	silhouette	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:21:51.102972	0.0071880062421162925	manhattan	dbscan	ch_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:21:52.889843	0.007747769355773926	manhattan	dbscan	db_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:22:00.491729	0.10570034980773926	manhattan	dbscan	sse	default	Number of labels is 1. Valid values are 2 to n_samples - 1 (inclusive)
+dataset.txt	2025-01-31 18:23:49.851917	0.029095129172007243	cosine	dbscan	silhouette	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:23:52.998602	0.030366075038909913	cosine	dbscan	ch_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:23:56.016016	0.029891196886698404	cosine	dbscan	db_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:31:04.501627	0.007568164666493734	cityblock	dbscan	silhouette	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:31:06.163898	0.00705257256825765	cityblock	dbscan	ch_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:31:07.884833	0.00773457686106364	cityblock	dbscan	db_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:31:15.636516	0.10866838693618774	cityblock	dbscan	sse	default	Number of labels is 1. Valid values are 2 to n_samples - 1 (inclusive)
+dataset.txt	2025-01-31 18:33:01.410242	0.00837102731068929	l1	dbscan	silhouette	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:33:03.081288	0.007034134864807129	l1	dbscan	ch_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:33:04.733283	0.007489395141601562	l1	dbscan	db_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:33:12.387797	0.10714763800303141	l1	dbscan	sse	default	Number of labels is 1. Valid values are 2 to n_samples - 1 (inclusive)
+dataset.txt	2025-01-31 18:34:59.141408	0.007777261734008789	l2	dbscan	silhouette	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:35:00.810988	0.006779789924621582	l2	dbscan	ch_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:35:02.594017	0.0071213046709696455	l2	dbscan	db_score	default	Found input variables with inconsistent numbers of samples: [315, 2]
+dataset.txt	2025-01-31 18:35:10.301122	0.10620374282201131	l2	dbscan	sse	default	Number of labels is 1. Valid values are 2 to n_samples - 1 (inclusive)

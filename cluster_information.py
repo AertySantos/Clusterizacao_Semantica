@@ -62,11 +62,11 @@ class Clustering:
         """
         # Verifica a dimensionalidade dos dados
         if self.data.shape[1] != 2:
-            print("[Info] Dados não estão em 2D. Aplicando PCA para redução de dimensionalidade.")
+            #print("[Info] Dados não estão em 2D. Aplicando PCA para redução de dimensionalidade.")
             pca = PCA(n_components=2)
             data_2d = pca.fit_transform(self.data)
         else:
-            print("[Info] Dados já estão em 2D. Nenhuma transformação será aplicada.")
+            #print("[Info] Dados já estão em 2D. Nenhuma transformação será aplicada.")
             data_2d = self.data
         
         # Cria o gráfico de dispersão
@@ -202,13 +202,100 @@ class Clustering:
     """
     ## algorithms:  'cluto', 'libDocumento', 'agglomerative', 'spectral', 'kmeans', 'minibatch', 'birch', 'affinity', 'dbscan'
 
+
+
     def _run_agglomerative(self):
-        return AgglomerativeClustering(n_clusters=self.n_clusters, linkage="complete", metric="precomputed").fit_predict(self.distance_mtx)
+        clustering_agglomerative = AgglomerativeClustering(
+            n_clusters=self.n_clusters, linkage="complete", metric="precomputed"
+        ).fit_predict(self.distance_mtx)
+
+        # Verifica a dimensionalidade dos dados e aplica PCA, se necessário
+        if self.data.shape[1] != 2:
+            #print("[Info] Dados não estão em 2D. Aplicando PCA para redução de dimensionalidade.")
+            pca = PCA(n_components=2)
+            data_2d = pca.fit_transform(self.data)
+        else:
+            #print("[Info] Dados já estão em 2D. Nenhuma transformação será aplicada.")
+            data_2d = self.data
+
+        # Calcula os centróides dos clusters
+        centroids = np.array([
+            data_2d[np.where(clustering_agglomerative == cluster)].mean(axis=0)
+            for cluster in np.unique(clustering_agglomerative)
+        ])
+
+        # Plota os clusters
+        plt.figure(figsize=(8, 6))
+        plt.scatter(
+            data_2d[:, 0], data_2d[:, 1], c=clustering_agglomerative, cmap="viridis",
+            marker="o", edgecolors="k", alpha=0.7, label="Pontos"
+        )
+
+        # Plota os centroides
+        plt.scatter(
+            centroids[:, 0], centroids[:, 1], color='black', marker='x',
+            s=100, label='Centroide'
+        )
+
+        # Configurações do gráfico
+        plt.xlabel("Dimensão 1", fontsize=12)
+        plt.ylabel("Dimensão 2", fontsize=12)
+        plt.title(f"Agglomerative Clustering (n_clusters={self.n_clusters})", fontsize=14)
+        plt.legend()
+        plt.grid(True)
+
+        # Salvar o gráfico
+        plt.savefig("data/output/graficos/agglomerative_clustering.png", dpi=300, bbox_inches="tight")
+        plt.show()
+
+        return clustering_agglomerative
 
 
     def _run_spectral(self):
-        return SpectralClustering(n_clusters=self.n_clusters, eigen_solver=None, affinity="precomputed").fit_predict(self.distance_mtx)
+        cluster_labels = SpectralClustering(
+            n_clusters=self.n_clusters, eigen_solver=None, affinity="precomputed"
+        ).fit_predict(self.distance_mtx)
 
+        # Redução de dimensionalidade para visualização
+        if self.data.shape[1] != 2:
+            #print("[Info] Dados não estão em 2D. Aplicando PCA para redução de dimensionalidade.")
+            pca = PCA(n_components=2)
+            data_2d = pca.fit_transform(self.data)
+        else:
+           # print("[Info] Dados já estão em 2D. Nenhuma transformação será aplicada.")
+            data_2d = self.data
+
+        # Calcula os centróides estimados dos clusters
+        centroids = np.array([
+            data_2d[np.where(cluster_labels == cluster)].mean(axis=0)
+            for cluster in np.unique(cluster_labels)
+        ])
+
+        # Plotando os pontos dos clusters
+        plt.figure(figsize=(8, 6))
+        plt.scatter(
+            data_2d[:, 0], data_2d[:, 1], c=cluster_labels, cmap="viridis",
+            marker="o", edgecolors="k", alpha=0.7, label="Pontos"
+        )
+
+        # Plotando os centróides estimados
+        plt.scatter(
+            centroids[:, 0], centroids[:, 1], color='black', marker='x',
+            s=100, label='Centroide'
+        )
+
+        # Configurações do gráfico
+        plt.xlabel("Dimensão 1", fontsize=12)
+        plt.ylabel("Dimensão 2", fontsize=12)
+        plt.title(f"Spectral Clustering (n_clusters={self.n_clusters})", fontsize=14)
+        plt.legend()
+        plt.grid(True)
+
+        # Salvar o gráfico
+        plt.savefig("data/output/graficos/spectral_clustering.png", dpi=300, bbox_inches="tight")
+        plt.show()
+
+        return cluster_labels
 
     def _run_dbscan(self):
         """
@@ -223,7 +310,50 @@ class Clustering:
         In both cases we solve throwing a null vector as result [], this approach needs to be solved in an upper level (caller).
         """
         # float(1/self.n_clusters) may be evaluated by some tests to prove efficiency
-        labels =  DBSCAN(eps=float(1/self.n_clusters), metric="precomputed").fit_predict(self.distance_mtx)
+        
+        # Aplica DBSCAN com matriz de distância pré-computada
+        labels = DBSCAN(eps=float(1/self.n_clusters), metric="precomputed").fit_predict(self.distance_mtx)
+
+        # Redução de dimensionalidade para visualização
+        if self.data.shape[1] != 2:
+            #print("[Info] Dados não estão em 2D. Aplicando PCA para redução de dimensionalidade.")
+            pca = PCA(n_components=2)
+            data_2d = pca.fit_transform(self.data)
+        else:
+            #print("[Info] Dados já estão em 2D. Nenhuma transformação será aplicada.")
+            data_2d = self.data
+
+        # Identifica os clusters e os outliers
+        unique_labels = np.unique(labels)
+        colors = plt.cm.viridis(np.linspace(0, 1, len(unique_labels)))
+        
+        plt.figure(figsize=(8, 6))
+
+        # Plota cada cluster com uma cor diferente
+        for cluster, color in zip(unique_labels, colors):
+            if cluster == -1:
+                # Outliers são plotados em vermelho
+                color = "red"
+                label = "Outlier"
+            else:
+                label = f"Cluster {cluster}"
+            
+            plt.scatter(
+                data_2d[labels == cluster, 0], data_2d[labels == cluster, 1],
+                c=[color], marker="o", edgecolors="k", alpha=0.7, label=label
+            )
+
+        # Configurações do gráfico
+        plt.xlabel("Dimensão 1", fontsize=12)
+        plt.ylabel("Dimensão 2", fontsize=12)
+        plt.title(f"DBSCAN Clustering (eps={1/self.n_clusters})", fontsize=14)
+        plt.legend()
+        plt.grid(True)
+
+        # Salvar o gráfico
+        plt.savefig("data/output/graficos/dbscan_clustering.png", dpi=300, bbox_inches="tight")
+        plt.show()
+
         return labels
     
 
@@ -231,14 +361,15 @@ class Clustering:
         """
         Executa o algoritmo K-Means para clusterização.
         """
+        
         # Configuração básica para o algoritmo K-Means
         kmeans = KMeans(n_clusters=self.n_clusters, random_state=42)
         
         # Ajusta o modelo com os dados
         kmeans.fit(self.data)
-
-        self.plot_clusters(kmeans.labels_)
         
+        self.plot_clusters(kmeans.labels_)
+       
         # Retorna os rótulos dos clusters
         return kmeans.labels_
 
@@ -251,6 +382,7 @@ class Clustering:
     
     
     def cluster_analysis(self):
+        
         # Otimiza número de clusters
         try:
             score, self.n_clusters = self._optimize_n_clusters()
@@ -280,10 +412,12 @@ class Clustering:
         max_iter = self.cluster_max - self.cluster_min
         ntests = int(0.5 * (self.cluster_max - self.cluster_min))
         res = minimize_scalar(self._cluster_metric, bounds=(self.cluster_min, self.cluster_max), options = {"maxiter": ntests})
+        
         return res.fun, int(res.x)
 
 
     def _cluster_metric(self, k_value):
+        
         # Collect the return from skopt
         if type(k_value) == list:
             self.n_clusters = int(k_value[0])
@@ -298,6 +432,7 @@ class Clustering:
             cluster_labels = self._run_dbscan()
         elif self.algorithm == "kmeans":
             cluster_labels = self._run_kmeans()
+            
         # Use one of the following methods to optimize clustering parameters
         if self.optimization == "nmi":
             with warnings.catch_warnings():
