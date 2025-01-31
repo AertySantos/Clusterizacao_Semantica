@@ -18,7 +18,7 @@ df_filtered = df[df["SS"] >= 0].copy()
 df_filtered["Num_Clusters"] = df_filtered["Clusters"].astype(str).apply(lambda x: len(x.split(":")))
 
 # Filtrar apenas algoritmos com mais de 2 clusters
-df_filtered = df_filtered[df_filtered["Num_Clusters"] > 4]
+df_filtered = df_filtered[df_filtered["Num_Clusters"] > 2]
 
 if df_filtered.empty:
     print("Nenhuma configuração gerou mais de dois clusters com SS ≥ 0.")
