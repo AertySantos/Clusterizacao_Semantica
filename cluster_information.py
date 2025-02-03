@@ -205,17 +205,16 @@ class Clustering:
 
 
     def _run_agglomerative(self):
+        # Aplica o AgglomerativeClustering
         clustering_agglomerative = AgglomerativeClustering(
             n_clusters=self.n_clusters, linkage="complete", metric="precomputed"
         ).fit_predict(self.distance_mtx)
 
         # Verifica a dimensionalidade dos dados e aplica PCA, se necessário
         if self.data.shape[1] != 2:
-            #print("[Info] Dados não estão em 2D. Aplicando PCA para redução de dimensionalidade.")
             pca = PCA(n_components=2)
             data_2d = pca.fit_transform(self.data)
         else:
-            #print("[Info] Dados já estão em 2D. Nenhuma transformação será aplicada.")
             data_2d = self.data
 
         # Calcula os centróides dos clusters
@@ -225,26 +224,29 @@ class Clustering:
         ])
 
         # Plota os clusters
-        plt.figure(figsize=(8, 6))
-        plt.scatter(
-            data_2d[:, 0], data_2d[:, 1], c=clustering_agglomerative, cmap="viridis",
-            marker="o", edgecolors="k", alpha=0.7, label="Pontos"
+        plt.figure(figsize=(10, 8))
+        scatter = plt.scatter(
+            data_2d[:, 0], data_2d[:, 1], c=clustering_agglomerative, cmap="tab10",
+            marker="o", edgecolors="k", alpha=0.7, s=80, label="Pontos"
         )
 
         # Plota os centroides
         plt.scatter(
-            centroids[:, 0], centroids[:, 1], color='black', marker='x',
-            s=100, label='Centroide'
+            centroids[:, 0], centroids[:, 1], color='black', marker='X',
+            s=200, label='Centroide', edgecolors='white', linewidth=1.5
         )
 
-        # Configurações do gráfico
-        plt.xlabel("Dimensão 1", fontsize=12)
-        plt.ylabel("Dimensão 2", fontsize=12)
-        plt.title(f"Agglomerative Clustering (n_clusters={self.n_clusters})", fontsize=14)
-        plt.legend()
-        plt.grid(True)
+        # Adiciona a barra de cores para indicar os clusters
+        plt.colorbar(scatter, label="Cluster")
 
-        # Salvar o gráfico
+        # Configurações do gráfico
+        plt.xlabel("Dimensão 1", fontsize=14)
+        plt.ylabel("Dimensão 2", fontsize=14)
+        plt.title(f"Agglomerative Clustering (n_clusters={self.n_clusters})", fontsize=16)
+        plt.legend(loc="best", fontsize=12)
+        plt.grid(True, linestyle='--', alpha=0.5)
+
+        # Salva o gráfico com melhor qualidade
         plt.savefig("data/output/graficos/agglomerative_clustering.png", dpi=300, bbox_inches="tight")
         plt.show()
 
