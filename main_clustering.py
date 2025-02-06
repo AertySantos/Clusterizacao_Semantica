@@ -126,6 +126,8 @@ def main():
     # parser.add_argument("-t", "--optimizer", type=str, dest="optimizer", default="default", help="Optimizer algorithm.")
     parser.add_argument("-e", "--evaluation", type=str, dest="evaluation", default="silhouette", help="Optimization measure using Clustering Internal Validity Indexes. Default : 'silhouette'. \n"+"-".join(_IV_INDEXES))
     parser.add_argument("-k", "--kclusters", type=int, dest="k_clusters", default=0, help="Initial k value tested as the optimization starter")
+    parser.add_argument("-g", "--grafico", action="store_true", help="Ativar a geração de gráficos durante a execução.")
+
     args = parser.parse_args()
 
     assert args.dbformat == "sparse" or args.dbformat == "dense", "Invalid matrix format"
@@ -146,6 +148,7 @@ def main():
     timer = 0.
     metrics = []
     clabels = []
+    grafico = False
     try:
         data = []
         if os.stat(args.dbinput+args.dataset):
@@ -199,7 +202,7 @@ def main():
             clstr = Clustering(
                 data, args.dbinput, args.dboutput, n_clusters_ = args.k_clusters, metric_ = args.distance_metric,
                 algorithm_ = args.algorithm, optimization_ = args.evaluation,
-                labels_=labels
+                labels_=labels, grafico_= args.grafico,
             )
             print("[Process] Starting Clustering.")
             clabels = clstr.cluster_analysis()
